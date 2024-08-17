@@ -82,7 +82,7 @@ akmenu4/ak2i/akmenu4.nds : akloader/akloader_ak2i.nds
 akmenu4/_DSMENU.DAT : akloader/akloader_r4idsn.nds
 	cd akmenu4 && $(MAKE) r4idsn
 
-dldi: dldi/rpg_nand/rpg_nand.dldi dldi/rpg_sd/rpg_sd.dldi dldi/r4_sd/r4_sd.dldi
+dldi: dldi/rpg_nand/rpg_nand.dldi dldi/rpg_sd/rpg_sd.dldi dldi/r4_sd/r4_sd.dldi dldi/ace3ds_sd/ace3ds_sd.dldi
 
 dldi/rpg_nand/rpg_nand.dldi:
 	cd dldi/rpg_nand && $(MAKE)
@@ -98,6 +98,9 @@ dldi/ak2i_sd/ak2i_sd.dldi:
 
 dldi/r4idsn_sd/r4idsn_sd.dldi:
 	cd dldi/r4idsn_sd && $(MAKE)
+
+dldi/ace3ds_sd/ace3ds_sd.dldi:
+	cd dldi/ace3ds_sd && $(MAKE)
 
 libelm: libelm/lib/libelm.a
 
@@ -121,9 +124,12 @@ libioak2i:
 libior4idsn:
 	cd libior4idsn && $(MAKE)
 
+libioace3ds:
+	cd libioace3ds && $(MAKE)
+
 fonts: fonts/tahoma.pcf
 
 fonts/tahoma.pcf:
 	cd fonts && $(MAKE)
 
-.PHONY: world all akloader akmenu4 dldi libelm libiorpg libior4 libioak2i libior4idsn libunds fonts clean cleanx kill ak2i r4idsn
+.PHONY: world all akloader akmenu4 dldi libelm libiorpg libior4 libioak2i libior4idsn libioace3ds libunds fonts clean cleanx kill ak2i r4idsn
