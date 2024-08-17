@@ -1,0 +1,11 @@
+build
+lib
+release
+*.elf
+*.arm7
+*.arm9
+*.dldi
+*.nds
+*.dat
+*.pcf
+*.tar.gz
