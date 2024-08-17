@@ -21,6 +21,7 @@ export PATH		:=	$(DEVKITARM)/bin:$(PATH)
 .PHONY: arm7/r4/$(TARGET).arm7 arm9/r4/$(TARGET).arm9
 .PHONY: arm7/ak2i/$(TARGET).arm7 arm9/ak2i/$(TARGET).arm9
 .PHONY: arm7/r4idsn/$(TARGET).arm7 arm9/r4idsn/$(TARGET).arm9
+.PHONY: arm7/ace3ds/$(TARGET).arm7 arm9/ace3ds/$(TARGET).arm9
 
 #---------------------------------------------------------------------------------
 # main targets
@@ -46,6 +47,11 @@ ak2i: ak2i/$(TARGET).nds
 # r4idsn target
 #---------------------------------------------------------------------------------
 r4idsn: _DSMENU.DAT
+
+#---------------------------------------------------------------------------------
+# ace3ds target
+#---------------------------------------------------------------------------------
+ace3ds: ace3ds/$(TARGET).nds
 
 #---------------------------------------------------------------------------------
 $(TARGET).nds	:	arm7/rpg/$(TARGET).arm7 arm9/rpg/$(TARGET).arm9
@@ -99,6 +105,19 @@ arm7/r4idsn/$(TARGET).arm7:
 #---------------------------------------------------------------------------------
 arm9/r4idsn/$(TARGET).arm9:
 	$(MAKE) -C arm9 STORAGE=r4idsn
+
+#---------------------------------------------------------------------------------
+ace3ds/$(TARGET).nds	:	arm7/ace3ds/$(TARGET).arm7 arm9/ace3ds/$(TARGET).arm9
+	mkdir -p ace3ds
+	ndstool	-c $@ -7 arm7/ace3ds/$(TARGET).arm7 -9 arm9/ace3ds/$(TARGET).arm9 -h 0x200 -b -e9 0x02000450 -e7 0x02380000 -b $(TARGET).bmp "wood ace3ds"
+
+#---------------------------------------------------------------------------------
+arm7/ace3ds/$(TARGET).arm7:
+	$(MAKE) -C arm7 STORAGE=ace3ds
+
+#---------------------------------------------------------------------------------
+arm9/ace3ds/$(TARGET).arm9:
+	$(MAKE) -C arm9 STORAGE=ace3ds
 
 #---------------------------------------------------------------------------------
 clean:

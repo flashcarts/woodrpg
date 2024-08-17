@@ -3,6 +3,7 @@ export LIBIOR4		:=	$(CURDIR)/libior4
 export LIBIORPG		:=	$(CURDIR)/libiorpg
 export LIBIOAK2I	:=	$(CURDIR)/libioak2i
 export LIBIOR4IDSN	:=	$(CURDIR)/libior4idsn
+export LIBIOACE3DS	:=	$(CURDIR)/libioace3ds
 export LIBELM  		:=	$(CURDIR)/libelm
 export LIBUNDS 		:=	$(CURDIR)/libunds
 RELEASE			:=	akmenu_3in1
@@ -28,6 +29,8 @@ world: all ak2i r4idsn
 ak2i: akmenu4/ak2i/akmenu4.nds dldi/ak2i_sd/ak2i_sd.dldi
 
 r4idsn: akmenu4/_DSMENU.DAT dldi/r4idsn_sd/r4idsn_sd.dldi
+
+ace3ds: akmenu4/ace3ds/akmenu4.nds
 
 clean:
 	cd libiorpg && $(MAKE) clean
@@ -81,6 +84,9 @@ akmenu4/ak2i/akmenu4.nds : akloader/akloader_ak2i.nds
 
 akmenu4/_DSMENU.DAT : akloader/akloader_r4idsn.nds
 	cd akmenu4 && $(MAKE) r4idsn
+
+akmenu4/ace3ds/akmenu4.nds : libioace3ds
+	cd akmenu4 && $(MAKE) ace3ds
 
 dldi: dldi/rpg_nand/rpg_nand.dldi dldi/rpg_sd/rpg_sd.dldi dldi/r4_sd/r4_sd.dldi dldi/ace3ds_sd/ace3ds_sd.dldi
 

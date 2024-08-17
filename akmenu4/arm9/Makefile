@@ -62,6 +62,9 @@ endif
 ifeq ($(STORAGE),r4idsn)
 LIBDIRS	+=	$(LIBIOR4IDSN)
 endif
+ifeq ($(STORAGE),ace3ds)
+LIBDIRS	+=	$(LIBIOACE3DS)
+endif
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional

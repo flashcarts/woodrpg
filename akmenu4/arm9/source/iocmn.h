@@ -27,6 +27,8 @@
 #include <ioak2i.h>
 #elif defined(_STORAGE_r4idsn)
 #include <ior4idsn.h>
+#elif defined(_STORAGE_ace3ds)
+#include <ioace3ds.h>
 #endif
 
 #endif
