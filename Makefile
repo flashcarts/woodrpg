@@ -7,6 +7,8 @@ export LIBELM  		:=	$(CURDIR)/libelm
 export LIBUNDS 		:=	$(CURDIR)/libunds
 RELEASE			:=	akmenu_3in1
 
+export DEVKITARM=/opt/devkitpro/devkitARM-r32
+
 all: dldi akmenu4 fonts
 	mkdir $(RELEASE)
 	cp akmenu4/akmenu4.nds $(RELEASE)/
