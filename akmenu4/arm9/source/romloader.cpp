@@ -23,8 +23,6 @@
 #include <elm.h>
 #include "romloader.h"
 #include "dbgtool.h"
-#include "akloader_arm7_bin.h"
-#include "akloader_arm9_bin.h"
 #include "savechip.h"
 #include "savemngr.h"
 #include "../../share/fifotool.h"
@@ -61,6 +59,26 @@ bool loadRom( const std::string & filename, u32 flags, long cheatOffset,size_t c
 bool loadRom( const std::string & filename, const std::string & savename, u32 flags, long cheatOffset,size_t cheatSize )
 #endif
 {
+    u32	akloader_header[16];
+    FILE	*akloader=NULL;
+
+    dbg_printf( "load %s\n", filename.c_str() );
+
+    akloader = fopen("fat0:/__rpg/akloader.nds", "rb");
+    if(akloader == NULL)	return false;
+    fread((u8*)akloader_header, 16*4, 1, akloader);
+
+    // copy loader's arm9 code
+    fseek(akloader, akloader_header[8], SEEK_SET);
+    fread((u8*)akloader_header[9], akloader_header[11], 1, akloader);
+    __NDSHeader->arm9executeAddress = akloader_header[9];
+
+    // copy loader's arm7 code
+    fseek(akloader, akloader_header[12], SEEK_SET);
+    fread((u8*)akloader_header[13], akloader_header[15], 1, akloader);
+    __NDSHeader->arm7executeAddress = akloader_header[13];
+    fclose(akloader);
+
 #if defined(_STORAGE_rpg)
     // copy filename to sram
     ALIGN(4) u8 filenameBuffer[MAX_FILENAME_LENGTH];
@@ -83,16 +101,6 @@ bool loadRom( const std::string & filename, const std::string & savename, u32 fl
     strcpy((char*)0x23fda00,filename.c_str());
     strcpy((char*)(0x23fda00+MAX_FILENAME_LENGTH),savename.c_str());
 #endif
-
-    dbg_printf( "load %s\n", filename.c_str() );
-
-    // copy loader's arm7 code
-    memcpy( (void *)0x023FA000, akloader_arm7_bin, akloader_arm7_bin_size );
-    __NDSHeader->arm7executeAddress = 0x023FA000;
-
-    // copy loader's arm9 code
-    memcpy( (void *)0x023c0000, akloader_arm9_bin, akloader_arm9_bin_size );
-    __NDSHeader->arm9executeAddress = 0x023c0000;
 
     dbg_printf( "load done\n" );
 
