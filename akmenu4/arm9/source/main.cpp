@@ -188,7 +188,7 @@ int main(void)
       {
         saveManager().backupSaveData();
       }
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
       saveManager().clearLastInfo();
 #endif
       //backup gba sram save date to flash.

@@ -23,7 +23,7 @@
 #include <nds.h>
 #include <elm.h>
 
-#if defined(_STORAGE_rpg) || defined(_STORAGE_r4)
+#if !defined(_STORAGE_ak2i) && !defined(_STORAGE_r4idsn)
 
 #include <sys/iosupport.h>
 #include <string>
@@ -41,7 +41,7 @@ class cSave64m
   public:
 #if defined(_STORAGE_rpg)
     static bool GenerateSaveMap(const std::string& aRomFilename,u8 aSlot);
-#elif defined(_STORAGE_r4)
+#else // not _STORAGE_rpg
     static bool GenerateSaveMap(std::string& aSaveName);
 #endif
 };

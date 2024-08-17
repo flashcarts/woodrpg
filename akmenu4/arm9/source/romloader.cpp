@@ -55,7 +55,7 @@ static void resetAndLoop()
 
 #if defined(_STORAGE_rpg)
 bool loadRom( const std::string & filename, u32 flags, long cheatOffset,size_t cheatSize )
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else
 bool loadRom( const std::string & filename, const std::string & savename, u32 flags, long cheatOffset,size_t cheatSize )
 #endif
 {
@@ -93,7 +93,7 @@ bool loadRom( const std::string & filename, const std::string & savename, u32 fl
     ioRpgWriteSram( address, &cheatOffset, sizeof(cheatOffset) );
     address+=sizeof(u32);
     ioRpgWriteSram( address, &cheatSize, sizeof(cheatSize) );
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
     *(u32*)0x23fd900=flags;
     *(u32*)0x23fd904=cheatOffset;
     *(u32*)0x23fd908=cheatSize;

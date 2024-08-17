@@ -25,7 +25,7 @@
 
 #if defined(_STORAGE_rpg)
 bool loadRom( const std::string & filename, u32 flags, long cheatOffset,size_t cheatSize );
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else
 bool loadRom( const std::string & filename, const std::string & savename, u32 flags, long cheatOffset,size_t cheatSize );
 #endif
 

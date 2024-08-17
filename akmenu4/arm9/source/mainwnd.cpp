@@ -398,7 +398,7 @@ bool cMainWnd::processKeyMessage( const cKeyMessage & msg )
               } else {
                   _mainList->enterDir( "fat0:/" );
               }
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
               _mainList->enterDir( "favorites:/" );
 #endif
             }
@@ -880,7 +880,7 @@ void cMainWnd::onFolderChanged()
       {
 #if defined(_STORAGE_rpg)
         loadRom("slot2:/",0,0,0);
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
         loadRom("slot2:/","",0,0,0);
 #endif
       }

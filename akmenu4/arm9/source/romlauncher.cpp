@@ -59,7 +59,7 @@ static SAVE_TYPE PrefillGame(u32 aGameCode)
   {
     case 0x385959: //YY8*: 2436 - Kakushi E Mystery - Riku to Yohan - Kieta 2-mai no E (Japan)
       return ST_64K;
-#if defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#if !defined(_STORAGE_rpg)
     case 0x533243: //C2S*: Pokemon Mystery Dungeon - Explorers of Sky
       return ST_1M;
 #endif
@@ -175,7 +175,7 @@ TLaunchResult launchRom(const std::string& aFullPath,DSRomInfo& aRomInfo,bool aM
 {
   u32 flags=0;
   long cheatOffset=0; size_t cheatSize=0;
-#if defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#if !defined(_STORAGE_rpg)
   std::string saveName;
 #endif
   if(!aRomInfo.isHomebrew())
@@ -248,7 +248,7 @@ TLaunchResult launchRom(const std::string& aFullPath,DSRomInfo& aRomInfo,bool aM
       }
     }
 
-#if defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#if !defined(_STORAGE_rpg)
     saveName=cSaveManager::generateSaveName(aFullPath,aRomInfo.saveInfo().getSlot());
 #endif
     if(isBigSave)
@@ -312,11 +312,11 @@ TLaunchResult launchRom(const std::string& aFullPath,DSRomInfo& aRomInfo,bool aM
 #if defined(_STORAGE_rpg)
           saveManager().restoreSaveData(aFullPath.c_str(),ST_NOSAVE,aRomInfo.saveInfo().getSlot());
           if(!dma) speed=0x1fff;
-#elif defined(_STORAGE_r4) || defined(_STORAGE_r4idsn)
-          saveManager().saveLastInfo(aFullPath);
 #elif defined(_STORAGE_ak2i)
           saveManager().saveLastInfo(aFullPath);
           if(!dma) speed=0x1fff;
+#else
+          saveManager().saveLastInfo(aFullPath);
 #endif
         }
         else
@@ -394,7 +394,7 @@ TLaunchResult launchRom(const std::string& aFullPath,DSRomInfo& aRomInfo,bool aM
   }
 #if defined(_STORAGE_rpg)
   loadRom(aFullPath,flags,cheatOffset,cheatSize);
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
   loadRom(aFullPath,saveName,flags,cheatOffset,cheatSize);
 #endif
   return ELaunchRomOk;

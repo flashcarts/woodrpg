@@ -353,16 +353,6 @@ void cRomInfoWnd::onShow()
 #define ITEM_SAVESLOT     1,3
 #define ITEM_ICON         1,4
 #define ITEM_LANGUAGE     1,5
-#elif defined(_STORAGE_r4) || defined(_STORAGE_r4idsn)
-#define ITEM_SAVETYPE     0,0
-#define ITEM_LINKAGE      0,1
-#define ITEM_RUMBLE       0,2
-
-#define ITEM_CHEATS       1,0
-#define ITEM_SOFTRESET    1,1
-#define ITEM_SAVESLOT     1,2
-#define ITEM_ICON         1,3
-#define ITEM_LANGUAGE     1,4
 #elif defined(_STORAGE_ak2i)
 #define ITEM_SAVETYPE     0,0
 #define ITEM_DOWNLOADPLAY 0,1
@@ -370,6 +360,16 @@ void cRomInfoWnd::onShow()
 #define ITEM_PROTECTION   0,3
 #define ITEM_LINKAGE      0,4
 #define ITEM_RUMBLE       0,5
+
+#define ITEM_CHEATS       1,0
+#define ITEM_SOFTRESET    1,1
+#define ITEM_SAVESLOT     1,2
+#define ITEM_ICON         1,3
+#define ITEM_LANGUAGE     1,4
+#else
+#define ITEM_SAVETYPE     0,0
+#define ITEM_LINKAGE      0,1
+#define ITEM_RUMBLE       0,2
 
 #define ITEM_CHEATS       1,0
 #define ITEM_SOFTRESET    1,1
@@ -496,7 +496,7 @@ void cRomInfoWnd::pressSaveType(void)
       settingWnd.getItemSelection(ITEM_RUMBLE),
 #if defined(_STORAGE_rpg) || defined(_STORAGE_ak2i)
       settingWnd.getItemSelection(ITEM_DOWNLOADPLAY),
-#elif defined(_STORAGE_r4) || defined(_STORAGE_r4idsn)
+#else
       0,
 #endif
       settingWnd.getItemSelection(ITEM_SOFTRESET),
@@ -505,7 +505,7 @@ void cRomInfoWnd::pressSaveType(void)
 #if defined(_STORAGE_rpg) || defined(_STORAGE_ak2i)
       settingWnd.getItemSelection(ITEM_DMA),
       settingWnd.getItemSelection(ITEM_PROTECTION),
-#elif defined(_STORAGE_r4) || defined(_STORAGE_r4idsn)
+#else
       2,
       0,
 #endif
@@ -513,7 +513,7 @@ void cRomInfoWnd::pressSaveType(void)
       settingWnd.getItemSelection(ITEM_ICON),
 #if defined(_STORAGE_rpg)
       settingWnd.getItemSelection(ITEM_SDSAVE),
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
       2,
 #endif
       settingWnd.getItemSelection(ITEM_LANGUAGE)

@@ -17,18 +17,16 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#if defined(_STORAGE_rpg) || defined(_STORAGE_r4)
+#if !defined(_STORAGE_ak2i) && !defined(_STORAGE_r4idsn)
 
 #include "save64m.h"
 #include <fcntl.h>
 #include <unistd.h>
 #include "dbgtool.h"
 #include "../../share/memtool.h"
+#include "iocmn.h"
 #if defined(_STORAGE_rpg)
 #include "savemngr.h"
-#include <iorpg.h>
-#elif defined(_STORAGE_r4)
-#include <ior4.h>
 #endif
 
 void cSave64m::IterateFileCluster(int aFileDes,u32* aFatMap)

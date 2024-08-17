@@ -49,7 +49,7 @@ cMainList::cMainList( s32 x, s32 y, u32 w, u32 h, cWindow * parent, const std::s
 : cListView( x, y, w, h, parent, text ),_showAllFiles(false),
 #if defined(_STORAGE_rpg)
 _topCount(4),_topuSD(1),_topSlot2(2),_topFavorites(3)
-#elif defined(_STORAGE_r4) || defined(_STORAGE_ak2i) || defined(_STORAGE_r4idsn)
+#else // not _STORAGE_rpg
 _topCount(3),_topuSD(0),_topSlot2(1),_topFavorites(2)
 #endif
 {
