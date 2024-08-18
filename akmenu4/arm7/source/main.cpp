@@ -78,18 +78,6 @@ static void prepairReset()
   swiDelay(1);
 }
 
-static void brightnessNext(void)
-{
-  u8 data=readPowerManagement(PM_NDSLITE_ADR);
-  if(0==(data&PM_NDSLITE_ISLITE)) // this is not a DS Lite machine
-    return;
-  u8 level=data&PM_NDSLITE_BRIGHTNESS_MASK;
-  level++;
-  data&=~PM_NDSLITE_BRIGHTNESS_MASK;
-  data|=PM_NDSLITE_BRIGHTNESS(level);
-  writePowerManagement(PM_NDSLITE_ADR,data);
-}
-
 static void brightnessSet(u8 level)
 {
   u8 data=readPowerManagement(PM_NDSLITE_ADR);
@@ -126,9 +114,6 @@ static void menuValue32Handler(u32 value,void* data)
     case MENU_MSG_ARM7_REBOOT:
       prepairReset();
       swiSoftReset();
-      break;
-    case MENU_MSG_BRIGHTNESS_NEXT:
-      brightnessNext();
       break;
     case MENU_MSG_SYSTEM:
       fifoSendValue32(FIFO_USER_02,getSystem());

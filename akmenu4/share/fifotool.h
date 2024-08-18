@@ -22,7 +22,6 @@
 #define MENU_MSG_GBA             1
 #define MENU_MSG_ARM7_REBOOT     2
 #define MENU_MSG_ARM7_READY_BOOT 3
-#define MENU_MSG_BRIGHTNESS_NEXT 4
 #define MENU_MSG_SYSTEM          5
 #define MENU_MSG_BRIGHTNESS_GET  7
 #define MENU_MSG_BRIGHTNESS_SET0 8

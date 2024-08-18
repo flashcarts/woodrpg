@@ -29,9 +29,7 @@
 #define SFN_SDCARD_LIST             SFN_SYSTEM_DIR"sdlist.ini"
 #define SFN_GLOBAL_SETTINGS         SFN_SYSTEM_DIR"globalsettings.ini"
 #define SFN_FAVORITES               SFN_SYSTEM_DIR"favorites.ini"
-#if defined(_STORAGE_r4)
 #define SFN_BACKLIGHT               SFN_SYSTEM_DIR"backlight.ini"
-#endif
 
 #define SFN_UI_DIRECTORY            SFN_SYSTEM_DIR"ui/"
 #define SFN_UI_CURRENT_DIRECTORY    SFN_UI_DIRECTORY + gs().uiName + "/"
